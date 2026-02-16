@@ -13,6 +13,8 @@
       --gray: #4b5563;
       --light: #f9fafb;
       --white: #ffffff;
+      --accent: #FFD700;
+      --shadow: rgba(255, 160, 122, 0.15);
     }
 
     * {
@@ -54,6 +56,12 @@
       width: 200%;
       height: 200%;
       background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.25) 0%, transparent 50%);
+      animation: shimmer 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes shimmer {
+      from { transform: scale(1) rotate(0deg); }
+      to { transform: scale(1.05) rotate(1deg); }
     }
 
     .logo {
@@ -62,12 +70,17 @@
       letter-spacing: -2px;
       margin-bottom: 0.8rem;
       text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      background: linear-gradient(45deg, var(--accent), white);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .tagline {
       font-size: 1.4rem;
       opacity: 0.95;
       margin-bottom: 1.5rem;
+      font-style: italic;
     }
 
     .title {
@@ -79,16 +92,18 @@
     .updated {
       font-size: 1.1rem;
       opacity: 0.9;
+      font-weight: 500;
     }
 
     main {
       background: var(--white);
       border-radius: 24px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      box-shadow: 0 20px 40px var(--shadow);
       margin: -4rem auto 4rem;
       padding: 3.5rem 2.5rem;
       position: relative;
       z-index: 10;
+      backdrop-filter: blur(10px);
     }
 
     .intro {
@@ -99,6 +114,10 @@
       max-width: 800px;
       margin-left: auto;
       margin-right: auto;
+      padding: 1rem;
+      background: var(--primary-light);
+      border-radius: 16px;
+      border: 1px solid var(--shadow);
     }
 
     section {
@@ -106,6 +125,16 @@
       opacity: 0;
       transform: translateY(20px);
       animation: fadeUp 0.7s forwards;
+      padding: 1.5rem;
+      background: var(--light);
+      border-radius: 16px;
+      border-left: 4px solid var(--primary);
+      transition: all 0.3s ease;
+    }
+
+    section:hover {
+      box-shadow: 0 10px 20px var(--shadow);
+      transform: translateY(-2px);
     }
 
     section:nth-child(1) { animation-delay: 0.1s; }
@@ -138,6 +167,10 @@
       margin: 2.5rem 0 1.2rem;
       position: relative;
       padding-left: 1.8rem;
+      background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     h2::before {
@@ -149,12 +182,15 @@
       height: 24px;
       background: var(--primary);
       border-radius: 3px;
+      box-shadow: 0 0 10px var(--primary);
     }
 
     h3 {
       color: var(--primary-dark);
       font-size: 1.35rem;
       margin: 2rem 0 1rem;
+      padding-left: 1rem;
+      border-left: 3px solid var(--primary-light);
     }
 
     p, li {
@@ -168,6 +204,16 @@
 
     li {
       margin-bottom: 0.9rem;
+      position: relative;
+      padding-left: 0.5rem;
+    }
+
+    li::before {
+      content: '→';
+      position: absolute;
+      left: -1.5rem;
+      color: var(--primary);
+      font-weight: bold;
     }
 
     .important {
@@ -177,21 +223,30 @@
       margin: 1.8rem 0;
       border-radius: 12px;
       font-weight: 500;
+      box-shadow: inset 0 2px 4px var(--shadow);
     }
 
     .highlight {
       background: rgba(255,160,122,0.15);
       padding: 0.3rem 0.6rem;
       border-radius: 6px;
+      font-weight: 600;
+      color: var(--primary-dark);
     }
 
     .contact-box {
-      background: var(--light);
+      background: linear-gradient(135deg, var(--light), var(--primary-light));
       border: 2px dashed var(--primary);
       border-radius: 16px;
       padding: 2.5rem;
       text-align: center;
       margin: 4rem 0 3rem;
+      box-shadow: 0 10px 30px var(--shadow);
+      transition: transform 0.3s ease;
+    }
+
+    .contact-box:hover {
+      transform: scale(1.02);
     }
 
     .contact-box a {
@@ -199,9 +254,11 @@
       font-weight: 700;
       text-decoration: none;
       font-size: 1.2rem;
+      transition: color 0.3s ease;
     }
 
     .contact-box a:hover {
+      color: var(--primary-dark);
       text-decoration: underline;
     }
 
@@ -211,6 +268,18 @@
       color: var(--gray);
       font-size: 0.95rem;
       border-top: 1px solid #e5e7eb;
+      background: var(--white);
+      border-radius: 20px 20px 0 0;
+      margin-top: 2rem;
+    }
+
+    .ad-placeholder {
+      margin: 2rem 0;
+      text-align: center;
+      padding: 1rem;
+      background: var(--light);
+      border-radius: 12px;
+      border: 1px solid var(--primary-light);
     }
 
     @media (max-width: 768px) {
@@ -226,6 +295,12 @@
       main {
         margin: -3.5rem 1rem 3rem;
         padding: 2.5rem 1.8rem;
+      }
+      section {
+        padding: 1rem;
+      }
+      li::before {
+        left: -1rem;
       }
     }
   </style>
@@ -273,6 +348,19 @@
       </script>
       <script src="https://deliverywhiskerspsychopath.com/31d5662faf2f4ed46aae43491cbc7ae7/invoke.js"></script>
 
+      <div class="ad-placeholder">
+        <iframe 
+          src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
+          width="100%"
+          height="600"
+          style="border: none;"
+          allowfullscreen
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          loading="lazy">
+          <p>Your browser does not support iframes.</p>
+        </iframe>
+      </div>
+
       <section>
         <h2>2. Information We Collect</h2>
         <p>We collect various types of information to provide, improve, and secure our Service. This includes data you provide directly and information gathered automatically.</p>
@@ -286,16 +374,18 @@
           <li>Date of birth (for age verification)</li>
           <li>Address or location details (if required for services)</li>
         </ul>
-<iframe 
-  src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
-  width="100%"
-  height="600"
-  style="border: none;"
-  allowfullscreen
-  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-  loading="lazy">
-  <p>Your browser does not support iframes.</p>
-</iframe>
+        <div class="ad-placeholder">
+          <iframe 
+            src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
+            width="100%"
+            height="600"
+            style="border: none;"
+            allowfullscreen
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+            loading="lazy">
+            <p>Your browser does not support iframes.</p>
+          </iframe>
+        </div>
         <h3>2.2 Financial & Transaction Information</h3>
         <p>Data related to your use of payment features:</p>
         <ul>
@@ -324,16 +414,19 @@
           <li>Cookies and similar technologies for session management</li>
         </ul>
       </section>
-<iframe 
-  src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
-  width="100%"
-  height="600"
-  style="border: none;"
-  allowfullscreen
-  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-  loading="lazy">
-  <p>Your browser does not support iframes.</p>
-</iframe>
+
+      <div class="ad-placeholder">
+        <iframe 
+          src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
+          width="100%"
+          height="600"
+          style="border: none;"
+          allowfullscreen
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          loading="lazy">
+          <p>Your browser does not support iframes.</p>
+        </iframe>
+      </div>
 
       <script async="async" data-cfasync="false" src="https://deliverywhiskerspsychopath.com/3eb17769254d09018ac58ee492a57f5e/invoke.js"></script>
       <div id="container-3eb17769254d09018ac58ee492a57f5e"></div>
@@ -351,16 +444,20 @@
           <li>For internal research and development to enhance our products</li>
         </ul>
       </section>
-<iframe 
-  src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
-  width="100%"
-  height="600"
-  style="border: none;"
-  allowfullscreen
-  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-  loading="lazy">
-  <p>Your browser does not support iframes.</p>
-</iframe>
+
+      <div class="ad-placeholder">
+        <iframe 
+          src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
+          width="100%"
+          height="600"
+          style="border: none;"
+          allowfullscreen
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          loading="lazy">
+          <p>Your browser does not support iframes.</p>
+        </iframe>
+      </div>
+
       <script>
         atOptions = {
           'key' : '31d5662faf2f4ed46aae43491cbc7ae7',
@@ -371,16 +468,20 @@
         };
       </script>
       <script src="https://deliverywhiskerspsychopath.com/31d5662faf2f4ed46aae43491cbc7ae7/invoke.js"></script>
-<iframe 
-  src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
-  width="100%"
-  height="600"
-  style="border: none;"
-  allowfullscreen
-  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-  loading="lazy">
-  <p>Your browser does not support iframes.</p>
-</iframe>
+
+      <div class="ad-placeholder">
+        <iframe 
+          src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
+          width="100%"
+          height="600"
+          style="border: none;"
+          allowfullscreen
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          loading="lazy">
+          <p>Your browser does not support iframes.</p>
+        </iframe>
+      </div>
+
       <section>
         <h2>4. Legal Basis for Processing</h2>
         <p>Our data processing is grounded in:</p>
@@ -391,6 +492,19 @@
           <li><strong>Legitimate Interests:</strong> For fraud prevention, security, and service improvements, balanced against your rights</li>
         </ul>
       </section>
+
+      <div class="ad-placeholder">
+        <iframe 
+          src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
+          width="100%"
+          height="600"
+          style="border: none;"
+          allowfullscreen
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          loading="lazy">
+          <p>Your browser does not support iframes.</p>
+        </iframe>
+      </div>
 
       <script async="async" data-cfasync="false" src="https://deliverywhiskerspsychopath.com/3eb17769254d09018ac58ee492a57f5e/invoke.js"></script>
       <div id="container-3eb17769254d09018ac58ee492a57f5e"></div>
@@ -419,6 +533,19 @@
       </script>
       <script src="https://deliverywhiskerspsychopath.com/31d5662faf2f4ed46aae43491cbc7ae7/invoke.js"></script>
 
+      <div class="ad-placeholder">
+        <iframe 
+          src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
+          width="100%"
+          height="600"
+          style="border: none;"
+          allowfullscreen
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          loading="lazy">
+          <p>Your browser does not support iframes.</p>
+        </iframe>
+      </div>
+
       <section>
         <h2>6. Data Sharing & Disclosure</h2>
         <p>We do not sell, rent, or trade your personal data. Sharing occurs only when essential:</p>
@@ -430,21 +557,26 @@
           <li>Anonymized or aggregated data for research or business intelligence</li>
         </ul>
       </section>
-<iframe 
-  src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
-  width="100%"
-  height="600"
-  style="border: none;"
-  allowfullscreen
-  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-  loading="lazy">
-  <p>Your browser does not support iframes.</p>
-</iframe>
+
+      <div class="ad-placeholder">
+        <iframe 
+          src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
+          width="100%"
+          height="600"
+          style="border: none;"
+          allowfullscreen
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          loading="lazy">
+          <p>Your browser does not support iframes.</p>
+        </iframe>
+      </div>
+
       <script async="async" data-cfasync="false" src="https://deliverywhiskerspsychopath.com/3eb17769254d09018ac58ee492a57f5e/invoke.js"></script>
       <div id="container-3eb17769254d09018ac58ee492a57f5e"></div>
 
-<script async="async" data-cfasync="false" src="https://deliverywhiskerspsychopath.com/3eb17769254d09018ac58ee492a57f5e/invoke.js"></script>
-<div id="container-3eb17769254d09018ac58ee492a57f5e"></div>
+      <script async="async" data-cfasync="false" src="https://deliverywhiskerspsychopath.com/3eb17769254d09018ac58ee492a57f5e/invoke.js"></script>
+      <div id="container-3eb17769254d09018ac58ee492a57f5e"></div>
+
       <section>
         <h2>7. Data Security</h2>
         <p>We employ industry-standard measures to protect your data:</p>
@@ -456,16 +588,20 @@
         </ul>
         <p>Despite these efforts, no system is infallible. You are responsible for securing your account credentials.</p>
       </section>
-<iframe 
-  src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
-  width="100%"
-  height="600"
-  style="border: none;"
-  allowfullscreen
-  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-  loading="lazy">
-  <p>Your browser does not support iframes.</p>
-</iframe>
+
+      <div class="ad-placeholder">
+        <iframe 
+          src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
+          width="100%"
+          height="600"
+          style="border: none;"
+          allowfullscreen
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          loading="lazy">
+          <p>Your browser does not support iframes.</p>
+        </iframe>
+      </div>
+
       <script>
         atOptions = {
           'key' : '31d5662faf2f4ed46aae43491cbc7ae7',
@@ -476,8 +612,9 @@
         };
       </script>
       <script src="https://deliverywhiskerspsychopath.com/31d5662faf2f4ed46aae43491cbc7ae7/invoke.js"></script>
-<script async="async" data-cfasync="false" src="https://deliverywhiskerspsychopath.com/3eb17769254d09018ac58ee492a57f5e/invoke.js"></script>
-<div id="container-3eb17769254d09018ac58ee492a57f5e"></div>
+
+      <script async="async" data-cfasync="false" src="https://deliverywhiskerspsychopath.com/3eb17769254d09018ac58ee492a57f5e/invoke.js"></script>
+      <div id="container-3eb17769254d09018ac58ee492a57f5e"></div>
 
       <section>
         <h2>8. Data Retention</h2>
@@ -487,26 +624,32 @@
           <li>Account data: While active, plus a reasonable period post-deletion</li>
           <li>Usage logs: Up to 2 years for analytics</li>
         </ul>
-<script async="async" data-cfasync="false" src="https://deliverywhiskerspsychopath.com/3eb17769254d09018ac58ee492a57f5e/invoke.js"></script>
-<div id="container-3eb17769254d09018ac58ee492a57f5e"></div>
+
+        <script async="async" data-cfasync="false" src="https://deliverywhiskerspsychopath.com/3eb17769254d09018ac58ee492a57f5e/invoke.js"></script>
+        <div id="container-3eb17769254d09018ac58ee492a57f5e"></div>
+
         <p>Data is securely deleted or anonymized when no longer required.</p>
       </section>
-<iframe 
-  src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
-  width="100%"
-  height="600"
-  style="border: none;"
-  allowfullscreen
-  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-  loading="lazy">
-  <p>Your browser does not support iframes.</p>
-</iframe>
+
+      <div class="ad-placeholder">
+        <iframe 
+          src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
+          width="100%"
+          height="600"
+          style="border: none;"
+          allowfullscreen
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          loading="lazy">
+          <p>Your browser does not support iframes.</p>
+        </iframe>
+      </div>
+
       <script async="async" data-cfasync="false" src="https://deliverywhiskerspsychopath.com/3eb17769254d09018ac58ee492a57f5e/invoke.js"></script>
       <div id="container-3eb17769254d09018ac58ee492a57f5e"></div>
 
       <section>
-<script async="async" data-cfasync="false" src="https://deliverywhiskerspsychopath.com/3eb17769254d09018ac58ee492a57f5e/invoke.js"></script>
-<div id="container-3eb17769254d09018ac58ee492a57f5e"></div>
+        <script async="async" data-cfasync="false" src="https://deliverywhiskerspsychopath.com/3eb17769254d09018ac58ee492a57f5e/invoke.js"></script>
+        <div id="container-3eb17769254d09018ac58ee492a57f5e"></div>
         <h2>9. Your Rights & Choices</h2>
         <p>Depending on your location, you may have rights under laws like NDPR (Nigeria Data Protection Regulation):</p>
         <ul>
@@ -532,16 +675,20 @@
         };
       </script>
       <script src="https://deliverywhiskerspsychopath.com/31d5662faf2f4ed46aae43491cbc7ae7/invoke.js"></script>
-<iframe 
-  src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
-  width="100%"
-  height="600"
-  style="border: none;"
-  allowfullscreen
-  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-  loading="lazy">
-  <p>Your browser does not support iframes.</p>
-</iframe>
+
+      <div class="ad-placeholder">
+        <iframe 
+          src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
+          width="100%"
+          height="600"
+          style="border: none;"
+          allowfullscreen
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          loading="lazy">
+          <p>Your browser does not support iframes.</p>
+        </iframe>
+      </div>
+
       <section>
         <h2>10. Cookies & Tracking Technologies</h2>
         <p>We use cookies, pixels, and similar tools for:</p>
@@ -553,25 +700,42 @@
         <p>You can manage preferences via browser settings or app options. Note: Disabling may limit functionality.</p>
       </section>
 
+      <div class="ad-placeholder">
+        <iframe 
+          src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
+          width="100%"
+          height="600"
+          style="border: none;"
+          allowfullscreen
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          loading="lazy">
+          <p>Your browser does not support iframes.</p>
+        </iframe>
+      </div>
+
       <script async="async" data-cfasync="false" src="https://deliverywhiskerspsychopath.com/3eb17769254d09018ac58ee492a57f5e/invoke.js"></script>
       <div id="container-3eb17769254d09018ac58ee492a57f5e"></div>
 
       <section>
-<script async="async" data-cfasync="false" src="https://deliverywhiskerspsychopath.com/3eb17769254d09018ac58ee492a57f5e/invoke.js"></script>
-<div id="container-3eb17769254d09018ac58ee492a57f5e"></div>
+        <script async="async" data-cfasync="false" src="https://deliverywhiskerspsychopath.com/3eb17769254d09018ac58ee492a57f5e/invoke.js"></script>
+        <div id="container-3eb17769254d09018ac58ee492a57f5e"></div>
         <h2>11. Children’s Privacy</h2>
         <p>Our Service is not for individuals under 18 (or 13 where stricter). We do not knowingly collect data from minors. If discovered, we delete it promptly.</p>
       </section>
-<iframe 
-  src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
-  width="100%"
-  height="600"
-  style="border: none;"
-  allowfullscreen
-  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-  loading="lazy">
-  <p>Your browser does not support iframes.</p>
-</iframe>
+
+      <div class="ad-placeholder">
+        <iframe 
+          src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
+          width="100%"
+          height="600"
+          style="border: none;"
+          allowfullscreen
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          loading="lazy">
+          <p>Your browser does not support iframes.</p>
+        </iframe>
+      </div>
+
       <script>
         atOptions = {
           'key' : '31d5662faf2f4ed46aae43491cbc7ae7',
@@ -587,6 +751,19 @@
         <h2>12. International Data Transfers</h2>
         <p>Data may be transferred to servers in other countries (e.g., US, EU). We use adequacy decisions, standard contractual clauses, or other mechanisms to ensure protection.</p>
       </section>
+
+      <div class="ad-placeholder">
+        <iframe 
+          src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
+          width="100%"
+          height="600"
+          style="border: none;"
+          allowfullscreen
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          loading="lazy">
+          <p>Your browser does not support iframes.</p>
+        </iframe>
+      </div>
 
       <script async="async" data-cfasync="false" src="https://deliverywhiskerspsychopath.com/3eb17769254d09018ac58ee492a57f5e/invoke.js"></script>
       <div id="container-3eb17769254d09018ac58ee492a57f5e"></div>
@@ -606,16 +783,20 @@
         };
       </script>
       <script src="https://deliverywhiskerspsychopath.com/31d5662faf2f4ed46aae43491cbc7ae7/invoke.js"></script>
-<iframe 
-  src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
-  width="100%"
-  height="600"
-  style="border: none;"
-  allowfullscreen
-  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-  loading="lazy">
-  <p>Your browser does not support iframes.</p>
-</iframe>
+
+      <div class="ad-placeholder">
+        <iframe 
+          src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
+          width="100%"
+          height="600"
+          style="border: none;"
+          allowfullscreen
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          loading="lazy">
+          <p>Your browser does not support iframes.</p>
+        </iframe>
+      </div>
+
       <section>
         <h2>14. Contact Information</h2>
         <div class="contact-box">
@@ -624,16 +805,24 @@
           <p style="margin-top: 1rem;"><strong>In-App Support:</strong> Available via the Help section</p>
         </div>
       </section>
-<iframe 
-  src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
-  width="100%"
-  height="600"
-  style="border: none;"
-  allowfullscreen
-  sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-  loading="lazy">
-  <p>Your browser does not support iframes.</p>
-</iframe>
+
+      <div class="ad-placeholder">
+        <iframe 
+          src="https://deliverywhiskerspsychopath.com/wgs5znfw4?key=56c133d1128835f23f52479489923442"
+          width="100%"
+          height="600"
+          style="border: none;"
+          allowfullscreen
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          loading="lazy">
+          <p>Your browser does not support iframes.</p>
+        </iframe>
+      </div>
+
+      <div class="ad-placeholder">
+        <script async="async" data-cfasync="false" src="https://deliverywhiskerspsychopath.com/3eb17769254d09018ac58ee492a57f5e/invoke.js"></script>
+        <div id="container-3eb17769254d09018ac58ee492a57f5e"></div>
+      </div>
     </main>
 
     <footer>
